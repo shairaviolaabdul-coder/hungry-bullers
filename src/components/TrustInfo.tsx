@@ -12,8 +12,6 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 export function TrustInfo() {
   return (
     <div className="border-t border-white/10 py-2">
-      <InfoRow label="Order deadline" value={TRUST_INFO.orderDeadline} />
-      <InfoRow label="Estimated release date" value={TRUST_INFO.estimatedRelease} />
       <InfoRow label="Payment verification" value={TRUST_INFO.verificationTimeframe} />
       <InfoRow label="Pickup location" value={PICKUP_INFO.location} />
       <InfoRow label="Order changes / refunds" value={TRUST_INFO.changePolicy} />

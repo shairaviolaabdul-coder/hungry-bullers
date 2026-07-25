@@ -86,7 +86,7 @@ export function PaymentSection({
         <ol className="list-inside list-decimal space-y-1">
           <li>Open your GCash app and scan the QR code above.</li>
           <li>Confirm the recipient name matches {GCASH_INFO.accountName}.</li>
-          <li>Pay the exact amount shown above — {formatPHP(total)}.</li>
+          <li>Pay the exact amount shown above.</li>
           <li>Screenshot your GCash payment confirmation.</li>
           <li>Upload the screenshot below as proof of payment.</li>
         </ol>

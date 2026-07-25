@@ -10,14 +10,7 @@ import { CustomerForm, type CustomerDetails } from "@/components/CustomerForm";
 import { PaymentSection } from "@/components/PaymentSection";
 import { OrderSummary } from "@/components/OrderSummary";
 import { ConfirmationScreen } from "@/components/ConfirmationScreen";
-import {
-  PRODUCT,
-  PRODUCT_SPECS,
-  TRUST_INFO,
-  createLineItem,
-  type DeliveryMethod,
-  type LineItem,
-} from "@/lib/mock-data";
+import { PRODUCT, createLineItem, type DeliveryMethod, type LineItem } from "@/lib/mock-data";
 import { formatPHP } from "@/lib/format";
 import { uploadPaymentProof } from "@/lib/upload";
 
@@ -44,15 +37,6 @@ function Section({
         {children}
       </div>
     </section>
-  );
-}
-
-function SpecRow({ label, value }: { label: string; value: string | null }) {
-  return (
-    <div className="flex justify-between border-b border-white/10 py-2.5 text-sm last:border-0">
-      <span className="text-white/40">{label}</span>
-      <span className="text-white/80">{value ?? "To be confirmed"}</span>
-    </div>
   );
 }
 
@@ -166,26 +150,6 @@ export default function Home() {
           <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/60">
             {PRODUCT.description}
           </p>
-
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            <div>
-              <p className="mb-2 text-xs tracking-[0.25em] text-white/40 uppercase">
-                Specifications
-              </p>
-              <SpecRow label="Fabric" value={PRODUCT_SPECS.fabric} />
-              <SpecRow label="GSM" value={PRODUCT_SPECS.gsm} />
-              <SpecRow label="Fit" value={PRODUCT_SPECS.fit} />
-              <SpecRow label="Care" value={PRODUCT_SPECS.care} />
-            </div>
-            <div>
-              <p className="mb-2 text-xs tracking-[0.25em] text-white/40 uppercase">
-                Order Deadline &amp; Timeline
-              </p>
-              <SpecRow label="Order deadline" value={TRUST_INFO.orderDeadline} />
-              <SpecRow label="Estimated production" value={TRUST_INFO.estimatedProductionTimeline} />
-              <SpecRow label="Estimated release" value={TRUST_INFO.estimatedRelease} />
-            </div>
-          </div>
         </div>
       </section>
 

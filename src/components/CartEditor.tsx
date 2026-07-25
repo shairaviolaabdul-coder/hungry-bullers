@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import {
   NAME_MAX_LENGTH,
   SIZES,
@@ -10,7 +7,6 @@ import {
   type LineItem,
 } from "@/lib/mock-data";
 import { formatPHP } from "@/lib/format";
-import { SizeGuideModal } from "@/components/SizeGuideModal";
 
 function LineItemRow({
   item,
@@ -148,8 +144,6 @@ export function CartEditor({
   cart: LineItem[];
   onChange: (cart: LineItem[]) => void;
 }) {
-  const [showSizeGuide, setShowSizeGuide] = useState(false);
-
   const updateItem = (id: string, next: LineItem) =>
     onChange(cart.map((item) => (item.id === id ? next : item)));
 
@@ -160,16 +154,6 @@ export function CartEditor({
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-end">
-        <button
-          type="button"
-          onClick={() => setShowSizeGuide(true)}
-          className="text-xs font-semibold tracking-widest text-lime uppercase underline-offset-4 hover:underline"
-        >
-          View Size Guide
-        </button>
-      </div>
-
       {cart.map((item, index) => (
         <LineItemRow
           key={item.id}
@@ -188,8 +172,6 @@ export function CartEditor({
       >
         + Add Another Shirt
       </button>
-
-      {showSizeGuide && <SizeGuideModal onClose={() => setShowSizeGuide(false)} />}
     </div>
   );
 }

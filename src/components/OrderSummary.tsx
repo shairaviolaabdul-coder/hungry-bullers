@@ -17,7 +17,7 @@ export function OrderSummary({
   cart: LineItem[];
   delivery: DeliveryMethod;
 }) {
-  const { subtotal, customizationFee, fee, total } = computeCartTotals(cart, delivery);
+  const { subtotal, total } = computeCartTotals(cart, delivery);
 
   return (
     <div className="border border-white/10 bg-charcoal p-5">
@@ -52,14 +52,6 @@ export function OrderSummary({
         <div className="flex justify-between text-white/60">
           <span>Merchandise subtotal</span>
           <span>{formatPHP(subtotal)}</span>
-        </div>
-        <div className="flex justify-between text-white/60">
-          <span>Customization fee</span>
-          <span>{formatPHP(customizationFee)}</span>
-        </div>
-        <div className="flex justify-between text-white/60">
-          <span>Delivery fee</span>
-          <span>{formatPHP(fee)}</span>
         </div>
       </div>
 
