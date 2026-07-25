@@ -1,0 +1,114 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { GCASH_INFO } from "@/lib/mock-data";
+
+function QRCode({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`relative overflow-hidden border border-white/15 bg-white p-2 ${className}`}
+    >
+      <Image
+        src="/qr-code.png"
+        alt="GCash payment QR code"
+        fill
+        sizes="420px"
+        style={{ objectFit: "contain" }}
+      />
+    </div>
+  );
+}
+
+export function PaymentSection({
+  proofFileName,
+  onProofChange,
+}: {
+  proofFileName: string | null;
+  onProofChange: (file: File | null) => void;
+}) {
+  const [enlarged, setEnlarged] = useState(false);
+
+  return (
+    <div className="space-y-5">
+      <div className="flex flex-col items-center gap-4 border border-white/10 bg-charcoal p-5 sm:flex-row sm:items-start">
+        <div className="flex shrink-0 flex-col items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setEnlarged(true)}
+            aria-label="Enlarge QR code"
+          >
+            <QRCode className="h-56 w-56" />
+          </button>
+          <button
+            type="button"
+            onClick={() => setEnlarged(true)}
+            className="text-xs font-semibold tracking-widest text-lime uppercase transition-colors hover:text-white"
+          >
+            Tap to enlarge
+          </button>
+        </div>
+        <div className="w-full space-y-1 text-sm">
+          <p className="text-xs tracking-[0.25em] text-white/50 uppercase">
+            Pay via GCash
+          </p>
+          <p className="font-semibold text-white">{GCASH_INFO.accountName}</p>
+          <p className="text-white/60">
+            Scan the QR code above using your GCash app to pay.
+          </p>
+        </div>
+      </div>
+
+      <div className="border-l-2 border-lime/60 bg-white/5 p-4 text-sm text-white/70">
+        <p className="mb-1 text-xs tracking-[0.25em] text-white/50 uppercase">
+          Instructions
+        </p>
+        <ol className="list-inside list-decimal space-y-1">
+          <li>Open your GCash app and scan the QR code above.</li>
+          <li>Confirm the recipient name matches {GCASH_INFO.accountName}.</li>
+          <li>Pay the exact final total shown in your order summary.</li>
+          <li>Screenshot your GCash payment confirmation.</li>
+          <li>Upload the screenshot below as proof of payment.</li>
+        </ol>
+      </div>
+
+      <label className="block">
+        <span className="mb-1.5 block text-xs tracking-[0.2em] text-white/50 uppercase">
+          Payment proof
+        </span>
+        <div className="flex h-11 w-full items-center border border-white/15 bg-charcoal px-3 text-sm">
+          <span className="flex-1 truncate text-white/60">
+            {proofFileName ?? "No file selected"}
+          </span>
+          <span className="ml-3 shrink-0 text-xs font-semibold tracking-widest text-lime uppercase">
+            Browse
+          </span>
+        </div>
+        <input
+          type="file"
+          accept="image/*"
+          className="sr-only"
+          onChange={(e) => onProofChange(e.target.files?.[0] ?? null)}
+        />
+      </label>
+
+      {enlarged && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6"
+          onClick={() => setEnlarged(false)}
+        >
+          <div className="flex flex-col items-center gap-4">
+            <QRCode className="h-[80vw] max-h-[420px] w-[80vw] max-w-[420px]" />
+            <button
+              type="button"
+              onClick={() => setEnlarged(false)}
+              className="border border-lime px-4 py-2 text-xs font-semibold tracking-widest text-lime uppercase transition-colors hover:bg-lime hover:text-black"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
