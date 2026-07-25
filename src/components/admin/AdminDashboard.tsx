@@ -9,7 +9,8 @@ import {
   type OrderStatus,
   type PaymentStatus,
 } from "@/lib/admin/types";
-import { SIZES, PRODUCT, type Size } from "@/lib/mock-data";
+import { SIZES, type Size } from "@/lib/mock-data";
+import { formatPHP } from "@/lib/format";
 import { OrderCard } from "@/components/admin/OrderCard";
 import { downloadCsv, ordersToCsv } from "@/lib/admin/csv";
 import { createClient } from "@/lib/supabase/client";
@@ -116,7 +117,7 @@ export function AdminDashboard({
         <StatCard label="Total Shirts Ordered" value={stats.total_shirts.toLocaleString()} />
         <StatCard
           label="Revenue (Verified)"
-          value={`${PRODUCT.currency} ${stats.verified_revenue.toLocaleString()}`}
+          value={formatPHP(stats.verified_revenue)}
         />
         <StatCard label="Total Orders" value={stats.total_orders.toLocaleString()} />
         <StatCard label="Pending Payments" value={stats.pending_payments.toLocaleString()} />

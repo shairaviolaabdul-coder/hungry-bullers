@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes, ChangeEvent } from "react";
-import type { DeliveryMethod } from "@/lib/mock-data";
+import { PICKUP_INFO, type DeliveryMethod } from "@/lib/mock-data";
 
 export type CustomerDetails = {
   fullName: string;
@@ -98,6 +98,12 @@ export function CustomerForm({
             );
           })}
         </div>
+
+        <p className="mt-2 text-xs text-white/40">
+          {delivery === "pickup"
+            ? `Club pickup is free. Pickup location: ${PICKUP_INFO.location}.`
+            : "Delivery is currently free — no delivery fee is added to your total."}
+        </p>
       </div>
 
       {delivery === "delivery" && (

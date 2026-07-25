@@ -7,7 +7,7 @@ import {
   type OrderStatus,
   type PaymentStatus,
 } from "@/lib/admin/types";
-import { PRODUCT } from "@/lib/mock-data";
+import { formatPHP } from "@/lib/format";
 
 const PAYMENT_BADGE: Record<PaymentStatus, string> = {
   pending: "border-white/25 text-white/60",
@@ -108,7 +108,7 @@ export function OrderCard({
             {STATUS_LABEL[order.order_status]}
           </span>
           <span className="text-sm font-semibold text-white">
-            {PRODUCT.currency} {order.total_amount.toLocaleString()}
+            {formatPHP(order.total_amount)}
           </span>
         </div>
       </button>
@@ -140,14 +140,14 @@ export function OrderCard({
                       <span className="text-white/40"> - {item.player_name}</span>
                     )}
                   </span>
-                  <span>{PRODUCT.currency} {item.line_total.toLocaleString()}</span>
+                  <span>{formatPHP(item.line_total)}</span>
                 </div>
               ))}
             </div>
             <div className="mt-2 flex justify-between border-t border-white/10 pt-2 text-sm text-white/50">
               <span>Subtotal / Delivery</span>
               <span>
-                {PRODUCT.currency} {order.merchandise_subtotal.toLocaleString()} + {order.delivery_fee.toLocaleString()}
+                {formatPHP(order.merchandise_subtotal)} + {formatPHP(order.delivery_fee)}
               </span>
             </div>
           </div>
